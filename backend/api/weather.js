@@ -6,6 +6,7 @@
  *          Returns current forecast data for a given latitude and longitude.
  */
 
+
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
@@ -37,3 +38,19 @@ router.get('/', async (req, res) => {
       unit: period.temperatureUnit,
       shortForecast: period.shortForecast,
       icon: period.icon
+    });
+  } catch (err) {
+    console.error('NWS API error:', err.message);
+    res.status(500).json({ error: 'Failed to fetch weather data' });
+  }
+});
+
+/**
+ * Placeholder: Add more routes here for additional weather-related data:
+ *    - /forecast/hourly
+ *    - /alerts
+ *    - /weather/extended
+ *    - Add caching/memoization for performance
+ */
+
+module.exports = router;
